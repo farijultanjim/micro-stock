@@ -40,7 +40,7 @@ const UploadPage = () => {
 
   return (
     <Form
-      type="Create"
+      type="Upload"
       post={post}
       setPost={setPost}
       submitting={submitting}

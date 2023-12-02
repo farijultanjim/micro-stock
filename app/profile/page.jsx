@@ -11,28 +11,46 @@ import Profile from "@/components/Profile";
 const ProfilePage = () => {
   const { data: session } = useSession();
 
-  const [posts, setPosts] = useState([]);
+  const [myPosts, setMyPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await fetch(`/api/users/${session?.user.id}/posts`);
       const data = await response.json();
 
-      setPosts(data);
+      setMyPosts(data);
     };
 
     if(session?.user.id) fetchPosts();
   }, []);
 
   const handleEdit = () => {};
-  const handleDelete = async () => {};
+  const handleDelete = async (post) => {
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete this image?"
+    );
+
+    if (hasConfirmed) {
+      try {
+        await fetch(`/api/upload/${post._id.toString()}`, {
+          method: "DELETE",
+        });
+
+        const filteredPosts = myPosts.filter((item) => item._id !== post._id);
+
+        setMyPosts(filteredPosts);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
-    <div>
+    <div className="mt-16 mx-auto w-full px-6 flex justify-center items-center flex-col gap-2">
       <Profile
         name="My"
         desc="Welcome to your personalized profile page"
-        data={posts}
+        data={myPosts}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
       />
