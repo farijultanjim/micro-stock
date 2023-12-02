@@ -1,70 +1,55 @@
 import Link from "next/link";
-import { useRef } from "react";
 
-const Form = ({
-  type,
-  submitting,
-  handleSubmit,
-  tag,
-  setTag,
-  image,
-  setImage,
-}) => {
-  const formRef = useRef();
-
+const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
-    TransformFile(file)
+    TransformFile(file);
   };
 
-  const TransformFile =(file)=>{
-    const reader = new FileReader()
-    if(file){
-      reader.readAsDataURL(file)
-      reader.onloadend = ()=>{
-        setImage(reader.result)
-      }
+  const TransformFile = (file) => {
+    const reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setPost({ ...post, image: reader.result });
+      };
     } else {
-      setImage('')
+      setPost({ ...post, image: "" });
     }
   };
 
   return (
     <section className="w-full max-w-full flex flex-col items-center px-6">
       <h1 className="bold-32 mt-6 text-left">
-        <span className="blue_gradient">{type} Image</span>
+        <span className="blue_gradient">Upload Image</span>
       </h1>
 
       <form
-        htmlFor="imageUpload"
-        ref={formRef}
         onSubmit={handleSubmit}
         className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism "
       >
-        <label >
-          <span className="font-semibold text-base text-gray-700  bold-18 mr-3">
+        <label>
+          <span className="font-semibold text-base text-gray-700  bold-18 ">
             Upload your image here
-          </span>
+          </span>{" "}
           <input
-            id="imageUpload"
             type="file"
             accept="image/*"
             onChange={handleImageChange}
-            hidden
-            required
             className="mt-5"
+            id="imageUpload"
+            hidden
           />
           <label
             htmlFor="imageUpload"
-            className="btn_green rounded-xl bold-16 cursor-pointer hover:bg-green-700"
+            className="btn_green rounded-xl bold-16 cursor-pointer hover:bg-green-700 "
           >
             Browse
           </label>
-          {image && (
+          {post.image && (
             <div className="mt-3">
               <img
-                src={image}
+                src={post.image}
                 alt="Image Preview"
                 className="max-w-full h-auto rounded"
               />
@@ -73,14 +58,28 @@ const Form = ({
         </label>
 
         <label>
-          <span className="i font-semibold text-base text-gray-700">
+          <span className="font-semibold text-base text-gray-700">
+            Field of Image Title{" "}
+          </span>
+          <input
+            value={post.title}
+            onChange={(e) => setPost({ ...post, title: e.target.value })}
+            type="text"
+            placeholder="Title"
+            required
+            className="form_input"
+          />
+        </label>
+        <label>
+          <span className="font-semibold text-base text-gray-700">
             Field of Image Tags{" "}
             <span className="font-normal">
               (#product, #nature, #model, etc.)
             </span>
           </span>
           <input
-            onChange={(e) => setTag(e.target.value)}
+            value={post.tag}
+            onChange={(e) => setPost({ ...post, tag: e.target.value })}
             type="text"
             placeholder="#Tag"
             required

@@ -6,14 +6,14 @@ const ImageSchema = new Schema({
         ref: 'User',
     },
 
-    // image: {
-    //     type: String,
-    // },
+    image: [{
+        type: String,
+    }],
 
-    // tag: {
-    //     type: String,
-    //     required: [true, 'Tag is required.'],
-    // },
+    tag: {
+        type: String,
+        required: [true, 'Tag is required.'],
+    },
 
     title: {
         type: String,
