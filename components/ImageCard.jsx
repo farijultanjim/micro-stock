@@ -17,11 +17,13 @@ const ImageCard = ({ post, handleDelete }) => {
 
   const handleDownload = () => {
     const imageUrl = post.image[0];
-    const fileName = `micro-stock_${new Date().toISOString().replace(/:/g, '-')}.jpg`;
+    const fileName = `micro-stock_${new Date()
+      .toISOString()
+      .replace(/:/g, "-")}.jpg`;
 
     const downloadLink = document.createElement("a");
     downloadLink.href = imageUrl;
-    downloadLink.download = fileName // You can set the desired file name here
+    downloadLink.download = fileName; // You can set the desired file name here
     downloadLink.click();
   };
 
@@ -34,7 +36,7 @@ const ImageCard = ({ post, handleDelete }) => {
           class="w-full h-auto group-hover:opacity-80 group-hover:shadow-2xl "
         />
         {session?.user.id === post.creator._id && pathName === "/profile" ? (
-          <div className="absolute w-full bottom-0 hidden group-hover:flex group-hover:justify-between group-hover:flex-row p-7 group-hover:bg-gradient-to-t from-slate-500 to-transparent">
+          <div className="absolute w-full bottom-0 hidden group-hover:flex group-hover:justify-between group-hover:flex-row px-7 pb-7 pt-16 group-hover:bg-gradient-to-t from-[#F6D6C5] to-transparent">
             <p
               className="font-inter text-sm green_gradient cursor-pointer"
               // onClick={handleEdit}
@@ -49,29 +51,27 @@ const ImageCard = ({ post, handleDelete }) => {
             </p>
           </div>
         ) : (
-          <div className="absolute w-full bottom-0 hidden group-hover:flex group-hover:justify-between group-hover:flex-row p-7 group-hover:bg-gradient-to-t from-slate-500 to-transparent">
-            <div>
-              <div
-                className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
-                onClick={handleProfileClick}
-              >
-                <Image
-                  src={post.creator.image}
-                  alt="user_image"
-                  width={40}
-                  height={40}
-                  className="rounded-full object-contain"
-                />
+          <div className="absolute w-full bottom-0 hidden group-hover:flex group-hover:justify-between group-hover:flex-row px-7 pb-7 pt-16 group-hover:bg-gradient-to-t from-[#F6D6C5] to-transparent">
+            <div
+              className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+              onClick={handleProfileClick}
+            >
+              <Image
+                src={post.creator.image}
+                alt="user_image"
+                width={30}
+                height={30}
+                className="rounded-full object-contain"
+              />
 
-                <div className="flex flex-col">
-                  <h3 className="font-satoshi font-semibold text-gray-900">
-                    {post.creator.username}
-                  </h3>
-                </div>
-              </div>
+              <h3 className="font-semibold text-gray-900">
+                {post.creator.username}
+              </h3>
             </div>
 
-            <button className="btn_green rounded-lg" onClick={handleDownload}>Download</button>
+            <button className="btn_orange" onClick={handleDownload}>
+              Download
+            </button>
           </div>
         )}
       </div>

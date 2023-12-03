@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import Logo from "@/public/Logo.png";
 
 import Button from "./Button";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 const Navbar = () => {
-  const {data: session} = useSession();
+  const { data: session } = useSession();
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -26,10 +27,7 @@ const Navbar = () => {
   return (
     <nav className="flexBetween max-container padding-container relative z-30 py-5 shadow-sm">
       <Link href="/">
-        <div className="text-[26px] font-[900]">
-          <span className="text-black">Micro</span>
-          <span className="text-green-50">Stock</span>
-        </div>
+        <Image src={Logo} alt="logo" height={42} width={100} />
       </Link>
 
       {/* Desktop Navigation */}
@@ -40,7 +38,7 @@ const Navbar = () => {
               <Button
                 type="button"
                 title="Upload"
-                variant="btn_green"
+                variant="btn_orange"
                 icon={<FileUploadIcon />}
               />
             </Link>
@@ -51,7 +49,7 @@ const Navbar = () => {
                 setToggleDropdown(false);
                 signOut();
               }}
-              className="bg-green-90 px-6 py-2 text-white transition-all hover:bg-green-50 rounded-full"
+              className="bg-green-90 px-6 py-2 text-white transition-all hover:bg-orange-50 rounded-full"
             >
               sign Out
             </button>
@@ -70,14 +68,21 @@ const Navbar = () => {
           <>
             {providers &&
               Object.values(providers).map((provider) => (
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => signIn(provider.id)}
-                  className="btn_green rounded-full"
-                >
-                  Join
-                </button>
+                <div className="flex items-center space-x-6">
+                  <div className="flex items-center space-x-6">
+                    <Link href="/">Explore</Link>
+                    <Link href="/">Events</Link>
+                    <Link href="/">Category</Link>
+                  </div>
+                  <button
+                    type="button"
+                    key={provider.name}
+                    onClick={() => signIn(provider.id)}
+                    className="btn_orange"
+                  >
+                    Join
+                  </button>
+                </div>
               ))}
           </>
         )}
@@ -96,18 +101,39 @@ const Navbar = () => {
               onClick={() => setToggleDropdown((prev) => !prev)}
             />
             {toggleDropdown && (
-              <div className="absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-green-300 min-w-[210px] flex flex-col gap-2 justify-end items-end">
+              <div className="absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-orange-300 min-w-[210px] flex flex-col gap-2 justify-end items-end">
                 <Link
                   href="/profile"
                   onClick={() => setToggleDropdown(false)}
-                  className="regular-16 text-gray-800 flexCenter cursor-pointer transition-all hover:font-bold hover:text-green-50"
+                  className="regular-16 text-gray-800 flexCenter cursor-pointer transition-all hover:font-bold hover:text-orange-50"
                 >
                   My Profile
                 </Link>
                 <Link
+                  href="/"
+                  onClick={() => setToggleDropdown(false)}
+                  className="regular-16 text-gray-800 flexCenter cursor-pointer transition-all hover:font-bold hover:text-orange-50"
+                >
+                  Explore
+                </Link>
+                <Link
+                  href="/"
+                  onClick={() => setToggleDropdown(false)}
+                  className="regular-16 text-gray-800 flexCenter cursor-pointer transition-all hover:font-bold hover:text-orange-50"
+                >
+                  Events
+                </Link>
+                <Link
+                  href="/"
+                  onClick={() => setToggleDropdown(false)}
+                  className="regular-16 text-gray-800 flexCenter cursor-pointer transition-all hover:font-bold hover:text-orange-50"
+                >
+                  Category
+                </Link>
+                <Link
                   href="/upload"
                   onClick={() => setToggleDropdown(false)}
-                  className="regular-16 text-gray-800 flexCenter cursor-pointer transition-all hover:font-bold hover:text-green-50"
+                  className="regular-16 text-gray-800 flexCenter cursor-pointer transition-all hover:font-bold hover:text-orange-50"
                 >
                   Upload
                 </Link>
@@ -117,7 +143,7 @@ const Navbar = () => {
                     setToggleDropdown(false);
                     signOut();
                   }}
-                  className="bg-green-90 px-6 py-1 text-white transition-all hover:bg-green-50 rounded-full"
+                  className="bg-green-90 px-6 py-1 text-white transition-all hover:bg-orange-50 rounded-full"
                 >
                   sign Out
                 </button>
@@ -132,7 +158,7 @@ const Navbar = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="btn_green rounded-full"
+                  className="btn_orange"
                 >
                   Join
                 </button>

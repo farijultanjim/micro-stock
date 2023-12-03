@@ -43,9 +43,9 @@ export const PATCH = async (request, { params }) => {
 export const DELETE = async (request, { params }) => {
     try {
         await connectToDB();
-
+        
         await Image.findByIdAndRemove(params.id);
-
+        
         return new Response("Image deleted successfully", { status: 200 })
     } catch (error) {
         return new Response("Failed to delete Image", { status: 500 })
