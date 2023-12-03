@@ -15,12 +15,22 @@ const ImageCard = ({ post, handleDelete }) => {
     router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
   };
 
+  const handleDownload = () => {
+    const imageUrl = post.image[0];
+    const fileName = `micro-stock_${new Date().toISOString().replace(/:/g, '-')}.jpg`;
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = imageUrl;
+    downloadLink.download = fileName // You can set the desired file name here
+    downloadLink.click();
+  };
+
   return (
     <>
       <div className="relative group">
         <img
           src={post.image[0]}
-          alt=""
+          alt="image"
           class="w-full h-auto group-hover:opacity-80 group-hover:shadow-2xl "
         />
         {session?.user.id === post.creator._id && pathName === "/profile" ? (
@@ -61,7 +71,7 @@ const ImageCard = ({ post, handleDelete }) => {
               </div>
             </div>
 
-            <button className="btn_green rounded-lg">Download</button>
+            <button className="btn_green rounded-lg" onClick={handleDownload}>Download</button>
           </div>
         )}
       </div>
