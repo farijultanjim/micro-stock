@@ -22,7 +22,7 @@ const Feed = () => {
 
 
   return (
-    <section className="mt-16 mx-auto w-full px-6 flex justify-center items-center flex-col gap-2">
+    <section className="flexBetween max-container padding-container mt-16 mx-auto w-full px-6 flex justify-center items-center flex-col gap-2">
       <GlobalImages
         name="My"
         desc="Welcome to your personalized profile page"

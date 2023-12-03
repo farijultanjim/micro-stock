@@ -8,6 +8,7 @@ import Logo from "@/public/Logo.png";
 
 import Button from "./Button";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
+import Searchbar from "./Searchbar";
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -26,18 +27,39 @@ const Navbar = () => {
 
   return (
     <nav className="flexBetween max-container padding-container relative z-30 py-5 shadow-sm">
-      <Link href="/">
-        <Image src={Logo} alt="logo" height={42} width={100} />
-      </Link>
+      <div className="flex items-center space-x-9">
+        <Link href="/">
+          <Image src={Logo} alt="logo" height={42} width={100} />
+        </Link>
+
+        <div className="hidden sm:flex ">
+          <Searchbar />
+        </div>
+      </div>
 
       {/* Desktop Navigation */}
       <div className="hidden sm:flex ">
         {session?.user ? (
           <div className="flex items-center gap-3 md:gap-5">
             <div className="flex items-center space-x-6">
-              <Link href="/">Explore</Link>
-              <Link href="/">Events</Link>
-              <Link href="/">Category</Link>
+              <Link href="/" className=" transition-all hover:text-orange-50 ">
+                Explore
+              </Link>
+              <Link href="/" className=" transition-all hover:text-orange-50 ">
+                Events
+              </Link>
+              <Link href="/" className=" transition-all hover:text-orange-50 ">
+                Category
+              </Link>
+            </div>
+            <div
+              onClick={() => {
+                setToggleDropdown(false);
+                signOut();
+              }}
+              className="transition-all hover:text-orange-50 cursor-pointer"
+            >
+              sign Out
             </div>
             <Link href="/upload">
               <Button
@@ -47,16 +69,6 @@ const Navbar = () => {
                 icon={<FileUploadIcon />}
               />
             </Link>
-
-            <div
-              onClick={() => {
-                setToggleDropdown(false);
-                signOut();
-              }}
-              className=" transition-all hover:text-orange-50 "
-            >
-              sign Out
-            </div>
 
             <Link href="/profile">
               <Image
