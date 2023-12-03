@@ -34,6 +34,11 @@ const Navbar = () => {
       <div className="hidden sm:flex ">
         {session?.user ? (
           <div className="flex items-center gap-3 md:gap-5">
+            <div className="flex items-center space-x-6">
+              <Link href="/">Explore</Link>
+              <Link href="/">Events</Link>
+              <Link href="/">Category</Link>
+            </div>
             <Link href="/upload">
               <Button
                 type="button"
@@ -43,16 +48,15 @@ const Navbar = () => {
               />
             </Link>
 
-            <button
-              type="button"
+            <div
               onClick={() => {
                 setToggleDropdown(false);
                 signOut();
               }}
-              className="bg-green-90 px-6 py-2 text-white transition-all hover:bg-orange-50 rounded-full"
+              className=" transition-all hover:text-orange-50 "
             >
               sign Out
-            </button>
+            </div>
 
             <Link href="/profile">
               <Image
