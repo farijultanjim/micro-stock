@@ -49,7 +49,7 @@ const ProfilePage = () => {
     <div className="mt-16 mx-auto w-full px-6 flex justify-center items-center flex-col gap-2">
       <Profile
         name="My"
-        desc="Welcome to your personalized profile page"
+        desc="Welcome to my personalized profile page"
         data={myPosts}
         handleEdit={handleEdit}
         handleDelete={handleDelete}

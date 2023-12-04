@@ -35,7 +35,7 @@ const ImageCard = ({ post, handleDelete }) => {
           alt="image"
           class="w-full h-auto group-hover:opacity-80 group-hover:shadow-2xl "
         />
-        {session?.user.id === post.creator._id && pathName === "/profile" ? (
+        {session?.user.id === post.creator?._id && pathName === "/profile" ? (
           <div className="absolute w-full bottom-0 hidden group-hover:flex group-hover:justify-between group-hover:flex-row px-7 pb-7 pt-16 group-hover:bg-gradient-to-t from-[#F6D6C5] to-transparent">
             <p
               className="font-inter text-sm green_gradient cursor-pointer"
@@ -57,7 +57,7 @@ const ImageCard = ({ post, handleDelete }) => {
               onClick={handleProfileClick}
             >
               <Image
-                src={post.creator.image}
+                src={post.creator?.image}
                 alt="user_image"
                 width={30}
                 height={30}
@@ -65,7 +65,7 @@ const ImageCard = ({ post, handleDelete }) => {
               />
 
               <h3 className="font-semibold text-gray-900">
-                {post.creator.username}
+                {post.creator?.username}
               </h3>
             </div>
 
