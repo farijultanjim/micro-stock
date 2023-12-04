@@ -11,7 +11,7 @@ const Hero = () => {
         <h1 className="font-bold text-base sm:bold-20 lg:bold-36 text-white">
         Unleash your creativity with captivating visuals.
         </h1>
-        <p className="text-white regular-16">Explore top-notch free stock photos, royalty-free images, and videos from talented creators on our AI-driven platform. </p>
+        <p className="text-white text-xs sm:regular-16">Explore top-notch free stock photos, royalty-free images, and videos from talented creators on our AI-driven platform. </p>
         <Searchbar/>
         <div className="hidden sm:flex sm:items-center sm:space-x-3 text-white pt-3">
           <p>Trending:</p>

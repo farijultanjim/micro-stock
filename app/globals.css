@@ -28,6 +28,9 @@ body {
   border-right: 10px solid transparent;
   border-bottom: 10px solid #fff; /* Adjust the color as needed */
 }
+.hero_bg{
+  background-image: url('../public/heroBg2.png')
+}
 
 @layer utilities {
   .btn_orange {
