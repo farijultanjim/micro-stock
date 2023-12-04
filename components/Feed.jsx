@@ -20,7 +20,6 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-
   return (
     <section className="flexBetween max-container padding-container mt-16 mx-auto w-full px-6 flex justify-center items-center flex-col gap-2">
       <GlobalImages

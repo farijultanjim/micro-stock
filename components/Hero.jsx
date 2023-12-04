@@ -22,7 +22,7 @@ const Hero = () => {
           <p className="bg-[#e7e1e11c] rounded-full px-2 py-1">Food</p>
         </div>
       </div>
-      <Image src={HeroBg} alt="heroBg" cover/>
+      <Image src={HeroBg} alt="heroBg" height={1440} width={1440}/>
       
       {/* <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60"></div> */}
     </div>
